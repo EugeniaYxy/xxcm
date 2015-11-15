@@ -6,6 +6,15 @@ describe('the form app', function() {
 
 	var bDateImp = element(by.model('user.bDate'));
 
+    beforeEach(function() { // run this function before each test
+        browser.get('http://localhost:8000/');
+    });
+
+    // Cee will work on later. Have question.
+    /*it('must have a last name', function() {
+        expect(browser.getTitle()).toEqual('My Tasks');
+    });*/
+
 	it('must show required validation error', function(){
         // isPresent(): get a boolean to decide whether the msg is there for not
         expect(requiredMsg.isPresent()).toEqual(false);
