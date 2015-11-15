@@ -1,64 +1,85 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta charset="UTF-8">
-    <title>Sign Up Form</title>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta charset="UTF-8">
+        <title>Sign Up Form</title>
 
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"
-          integrity="sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ=="
-          crossorigin="anonymous">
-    <!--our stylesheet-->
-    <link rel="stylesheet" href="css/main.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"
+              integrity="sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ=="
+              crossorigin="anonymous">
+        <!--our stylesheet-->
+        <link rel="stylesheet" href="css/main.css">
 
-    <!-- angular script file -->
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular.min.js"></script>
+        <!-- angular script file -->
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular.min.js"></script>
 
-    <!-- our script file -->
-    <script src="js/app.js"></script>
+        <!--lodash cdn-->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/3.10.1/lodash.js"></script>
 
-</head>
-<body>
-    <main class="container">
-        <h1>Sign Up</h1>
-        <h4>Our service is fun and awesome, but you must be 13 years old to join</h4>
 
-        <form name="signupForm">
-            <div class="form-group">
-                <label for="email">Email</label>
-                <input type="text" class="form-control"/>
-            </div>
-            
-            <div class="form-group">
-                <label for="fname">First Name</label>
-                <input type="text" class="form-control"/>
-            </div>
-            
-            <div class="form-group">
-                <label for="lname">Last Name</label>
-                <input type="text" class="form-control"/>
-            </div>
-            <div class="form-group">
-                <label for="bdate">Birthdate</label>
-                <input type="text" class="form-control"/>
-            </div>
+        <!-- our script file -->
+        <script src="js/app.js"></script>
 
-            <div class="form-group">
-                <label for="password">Password</label>
-                <input type="password" class="form-control"/>
-            </div>
+    </head>
+    <body ng-app="formApp">
+        <main class="container">
+            <h1>Sign Up</h1>
+            <h4>Our service is fun and awesome, but you must be 13 years old to join</h4>
 
-            <div class="form-group">
-                <label for="cpassword">Confirm Password</label>
-                <input type="password" class="form-control"/>
-            </div>
-            <div class="form-group">
-                <button class="btn btn-default">Reset</button>
-                <button type="submit" class="btn btn-primary">
-                    Sign Me Up!
-                </button>
-            </div>
-        </form>
-    </main>
-</body>
+            <form name="signupForm" ng-submit="submit()" novalidate >
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="text" class="form-control"/>
+                </div>
+
+                <div class="form-group">
+                    <label for="fname">First Name</label>
+                    <input type="text" class="form-control"/>
+                </div>
+
+                <div class="form-group">
+                    <label for="lname">Last Name</label>
+                    <input type="text" class="form-control"/>
+                </div>
+
+                <div class="form-group">
+                    <label for="bDate">Birthdate</label>
+                    <input type="text" class="form-control" id="bDate"
+                           name="bDate" ng-model = "user.bDate" placeholder="date of birth"
+                           required valid-age valid-date/>
+                    <p class="validation-error bDate-required-error"
+                       ng-if="signupForm.bDate.$dirty && signupForm.bDate.$error.required">
+                        Date of Birth is required
+                    </p>
+                    <p class="validation-error vDate-required-error"
+                       ng-if="signupForm.bDate.$dirty && signupForm.bDate.$error.validDate">
+                        Date of Birth must be a valid date
+                    </p>
+                    <p class="validation-error vAge-required-error"
+                       ng-if="signupForm.bDate.$dirty && signupForm.bDate.$error.validAge">
+                        Date of Birth must be at least thirteen years in the past
+                    </p>
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" class="form-control"/>
+                </div>
+
+                <div class="form-group">
+                    <label for="cpassword">Confirm Password</label>
+                    <input type="password" class="form-control"/>
+                </div>
+
+                <div class="form-group">
+                    <button class="btn btn-default">Reset</button>
+                    <button type="submit" class="btn btn-primary"
+                        ng-disabled = "signupForm.$invalid">
+                        Sign Me Up
+                    </button>
+                </div>
+            </form>
+        </main>
+    </body>
 </html>
