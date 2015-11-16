@@ -2,14 +2,15 @@
 angular.module('formApp', [])
 
     .controller('FormController', function ($scope, $http) {
-
-        $scope.submit = function() {
-            // saw a submit function in the 31st line index file
-            // if want, you can make the form refresh when
-            // you hit submit? otherwise we should take
-            // this out
+        $scope.master = {
+            lname: "",
+            bDate: ""
+    };
+        $scope.reset = function() {
+            $scope.user = angular.copy($scope.master)
         }
     })
+
     .directive('validDate', function() {
         return {
             require:'ngModel',
