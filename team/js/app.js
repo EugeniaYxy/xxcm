@@ -10,6 +10,7 @@ angular.module('formApp', [])
             // this out
         }
     })
+
     .directive('validDate', function() {
         return {
             require:'ngModel',
@@ -36,4 +37,18 @@ angular.module('formApp', [])
                 }
             }
         }
+    })
+
+
+    .directive('validPassword', function() {
+        return {
+            require: 'ngModel',
+            link: function(scope, elem, attrs, controller) {
+                controller.$validators.validPassword = function(modelValue) {
+                    var p1 = scope.user.password;
+                    return (p1 === modelValue);
+                }
+            }
+        }
     });
+

@@ -17,7 +17,7 @@ describe('the form app', function() {
 
 	beforeEach(function() {
         browser.get('http://localhost:8000');
-    })
+    }); 
 
     it('must show valid date validation error', function() {
         expect(vDateMsg.isPresent()).toEqual(false);
@@ -34,7 +34,7 @@ describe('the form app', function() {
         expect(requiredName.isPresent()).toEqual(true);
         taskTitleInp.sendKeys('abc');
         expect(requiredName.isPresent()).toEqual(false);
-    })
+    });
    
     it('must show valid age validation error', function() {
         expect(vAgeMsg.isPresent()).toEqual(false);
