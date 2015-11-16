@@ -1,5 +1,19 @@
 
 angular.module('formApp', [])
+
+    .controller('FormController', function ($scope, $http) {
+        $scope.master = {
+            lname: "",
+            bDate: "",
+            emailInp: ""
+            // add in password and confirm password to reset
+        };
+
+        $scope.reset = function() {
+            $scope.user = angular.copy($scope.master)
+        }
+    })
+
     .directive('validDate', function() {
         return {
             require:'ngModel',
