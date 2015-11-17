@@ -114,17 +114,6 @@ describe('the form app', function() {
         expect(alertMsg.isPresent()).toEqual(false);
     });
 
-    it('must show success message alert', function () {
-        expect(alertMsg.isPresent()).toEqual(false);
-        lnameInp.sendKeys('abc');
-        emailInp.sendKeys('example@email.com');
-        bDateImp.sendKeys('11/4/2000');
-        clickSubmit.click();
-        expect(alertMsg.isPresent()).toEqual(true);
-        closeTab.click();
-        expect(alertMsg.isPresent()).toEqual(false);
-    });
-
     it('must show required password error', function() {
         expect(passwordMsg.isPresent()).toEqual(false);
         passwordInp.sendKeys('123');
@@ -147,4 +136,18 @@ describe('the form app', function() {
         cpasswordInp.sendKeys('password');
         expect(passwordMatchMsg.isPresent()).toEqual(false);
     });
+
+    it('must show success message alert', function () {
+        expect(alertMsg.isPresent()).toEqual(false);
+        lnameInp.sendKeys('abc');
+        emailInp.sendKeys('example@email.com');
+        bDateImp.sendKeys('11/4/2000');
+        passwordInp.sendKeys('password');
+        cpasswordInp.sendKeys('password');
+        clickSubmit.click();
+        expect(alertMsg.isPresent()).toEqual(true);
+        closeTab.click();
+        expect(alertMsg.isPresent()).toEqual(false);
+    });
+
 });
