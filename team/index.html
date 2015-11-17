@@ -22,12 +22,18 @@
         <script src="js/app.js"></script>
 
     </head>
-    <body ng-app="formApp">
+    <body ng-app="formApp" ng-controller = "formController">
         <main class="container">
             <h1>Sign Up</h1>
             <h4>Our service is fun and awesome, but you must be 13 years old to join</h4>
+            <p class="alert alert-success"
+               ng-if="showSuccessAlert" id="box">
+                <span>You successfully sign up!</span>
+                <a href="#" class="close" data-dismiss="alert"
+                   aria-label="close" ng-click="tab()" id="closeTab">&times;</a>
+            </p>
 
-            <form name="signupForm" ng-submit="submit()" novalidate >
+            <form name="signupForm" ng-submit="confirm()" novalidate >
                 <div class="form-group">
                     <label for="email">Email</label>
                     <input type="text" class="form-control"/>
@@ -75,7 +81,7 @@
                 <div class="form-group">
                     <button class="btn btn-default">Reset</button>
                     <button type="submit" class="btn btn-primary"
-                        ng-disabled = "signupForm.$invalid">
+                            ng-disabled = "signupForm.$invalid">
                         Sign Me Up
                     </button>
                 </div>

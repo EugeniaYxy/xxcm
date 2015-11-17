@@ -1,5 +1,18 @@
 
 angular.module('formApp', [])
+    .controller('formController', function($scope, $location, $anchorScroll) {
+        'use strict';
+        $scope.confirm = function() {
+            $scope.showSuccessAlert = true;
+            $location.hash('box');
+            $anchorScroll();
+        };
+        $scope.tab = function() {
+            $scope.showSuccessAlert = false;
+        };
+    })
+
+
     .directive('validDate', function() {
         return {
             require:'ngModel',
@@ -27,3 +40,7 @@ angular.module('formApp', [])
             }
         }
     });
+
+
+
+    
