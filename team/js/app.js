@@ -1,17 +1,30 @@
 
 angular.module('formApp', [])
-    .controller('formController', function($scope, $location, $anchorScroll) {
+    .controller('formController', function ($scope, $http, $location, $anchorScroll) {
         'use strict';
+        $scope.master = {
+            lname: "",
+            bDate: "",
+            emailInp: ""
+        // add in password and confirm password to reset
+        };
+
         $scope.confirm = function() {
             $scope.showSuccessAlert = true;
             $location.hash('box');
             $anchorScroll();
         };
+
         $scope.tab = function() {
             $scope.showSuccessAlert = false;
         };
-    })
 
+        $scope.reset = function() {
+            console.log('reset called');
+            $scope.showSuccessAlert = false;
+            $scope.user = angular.copy($scope.master);
+        }
+    })
 
     .directive('validDate', function() {
         return {
