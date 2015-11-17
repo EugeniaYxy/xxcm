@@ -6,6 +6,7 @@ describe('the form app', function() {
     var alertMsg = $('.alert-success');
 
     var requiredName = $('.requiredName');
+    var validName = $('.validName');
 
     var bDateImp = element(by.model('user.bDate'));
     var clickSubmit = element(by.buttonText('Sign Me Up'));
@@ -64,6 +65,17 @@ describe('the form app', function() {
         expect(requiredName.isPresent()).toEqual(true);
         lnameInp.sendKeys('abc');
         expect(requiredName.isPresent()).toEqual(false);
+    });
+
+    it('must enter a valid last name', function() {
+        expect(validName.isPresent()).toEqual(false);
+        lnameInp.sendKeys('123');
+        expect(validName.isPresent()).toEqual(true);
+        lnameInp.clear();
+        expect(requiredName.isPresent()).toEqual(true);
+        lnameInp.sendKeys('Alex');
+        expect(validName.isPresent()).toEqual(false);
+
     });
 
     it('must show validation error for email', function () {

@@ -6,7 +6,6 @@ angular.module('formApp', [])
             lname: "",
             bDate: "",
             emailInp: ""
-        // add in password and confirm password to reset
         };
 
         $scope.confirm = function() {
@@ -23,6 +22,7 @@ angular.module('formApp', [])
             console.log('reset called');
             $scope.showSuccessAlert = false;
             $scope.user = angular.copy($scope.master);
+            $scope.signupForm.$setPristine();
         };
 
         $scope.user = {password:"",  cpassword:""};
@@ -39,8 +39,7 @@ angular.module('formApp', [])
             }
         }
     })
-
-
+    
     .directive('validAge', function() {
         return {
             require:'ngModel',
