@@ -36,7 +36,7 @@
         <h4>Our service is fun and awesome, but you must be 13 years old to join</h4>
         <p class="alert alert-success"
            ng-if="showSuccessAlert" id="box">
-            <span>You successfully sign up!</span>
+            <span>You've successfully signed up!</span>
             <a href="#" class="close" data-dismiss="alert"
                aria-label="close" ng-click="tab()" id="closeTab">&times;</a>
         </p>
@@ -93,12 +93,28 @@
 
             <div class="form-group">
                 <label for="password">Password</label>
-                <input type="password" class="form-control"/>
+                <input type="password" class="form-control" id="password"
+                       name="password" ng-model="user.password"
+                       required/>
+                <p class="validation-error password-required-error"
+                   ng-if="signupForm.password.$dirty
+                       && signupForm.password.$error.required">Password is required</p>
             </div>
 
             <div class="form-group">
                 <label for="cpassword">Confirm Password</label>
-                <input type="password" class="form-control"/>
+                <input type="password" class="form-control" id="cpassword"
+                       name="cpassword" ng-model="user.cpassword"
+                       required valid-password/>
+                <p class="validation-error cpassword-required-error"
+                   ng-if="signupForm.cpassword.$dirty
+                            && signupForm.cpassword.$error.required">
+                    Password confirmation is required
+                </p>
+                <p class="validation-error password-match-error"
+                   ng-if="signupForm.cpassword.$error.validPassword
+                            && !signupForm.cpassword.$error.required">
+                    Passwords must match</p>
             </div>
 
             <div class="form-group">
