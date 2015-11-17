@@ -23,7 +23,9 @@ angular.module('formApp', [])
             console.log('reset called');
             $scope.showSuccessAlert = false;
             $scope.user = angular.copy($scope.master);
-        }
+        };
+
+        $scope.user = {password:"",  cpassword:""};
     })
 
     .directive('validDate', function() {
@@ -49,6 +51,18 @@ angular.module('formApp', [])
                     var year = (365 * 24 * 60 * 60 * 1000);
                     var age = (currentDate - userImp) / year;
                     return (age >= 13);
+                }
+            }
+        }
+    })
+
+    .directive('validPassword', function() {
+        return {
+            require: 'ngModel',
+            link: function(scope, elem, attrs, controller) {
+                controller.$validators.validPassword = function(modelValue) {
+                    var p1 = scope.user.password;
+                    return (p1 === modelValue);
                 }
             }
         }
