@@ -1,16 +1,28 @@
 
 angular.module('formApp', [])
-
-    .controller('FormController', function ($scope, $http) {
+    .controller('formController', function ($scope, $http, $location, $anchorScroll) {
+        'use strict';
         $scope.master = {
             lname: "",
             bDate: "",
             emailInp: ""
-            // add in password and confirm password to reset
+        // add in password and confirm password to reset
+        };
+
+        $scope.confirm = function() {
+            $scope.showSuccessAlert = true;
+            $location.hash('box');
+            $anchorScroll();
+        };
+
+        $scope.tab = function() {
+            $scope.showSuccessAlert = false;
         };
 
         $scope.reset = function() {
-            $scope.user = angular.copy($scope.master)
+            console.log('reset called');
+            $scope.showSuccessAlert = false;
+            $scope.user = angular.copy($scope.master);
         }
     })
 
@@ -41,3 +53,7 @@ angular.module('formApp', [])
             }
         }
     });
+
+
+
+    
