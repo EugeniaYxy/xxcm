@@ -17,6 +17,13 @@ describe('the form app', function() {
     var emailInvalid = $('.email-invalid-error');
     var emailRequired = $('.email-required-error');
 
+
+    var passwordMsg = $('.password-required-error');
+    var passwordMatchMsg = $('.password-match-error');
+
+    var passwordInp = element(by.model('user.password'));
+    var cpasswordInp = element(by.model('user.cpassword'));
+
     beforeEach(function () {
         browser.get('http://localhost:8000/');
     });
@@ -116,5 +123,28 @@ describe('the form app', function() {
         expect(alertMsg.isPresent()).toEqual(true);
         closeTab.click();
         expect(alertMsg.isPresent()).toEqual(false);
+    });
+
+    it('must show required password error', function() {
+        expect(passwordMsg.isPresent()).toEqual(false);
+        passwordInp.sendKeys('123');
+        expect(passwordMsg.isPresent()).toEqual(false);
+        passwordInp.clear();
+        expect(passwordMsg.isPresent()).toEqual(true);
+        passwordInp.sendKeys('abc');
+        expect(passwordMsg.isPresent()).toEqual(false);
+
+    });
+
+    it('must show password match error', function() {
+        expect(passwordMatchMsg.isPresent()).toEqual(false);
+        passwordInp.sendKeys('123');
+        cpasswordInp.sendKeys('abc');
+        expect(passwordMatchMsg.isPresent()).toEqual(true);
+        passwordInp.clear();
+        cpasswordInp.clear();
+        passwordInp.sendKeys('password');
+        cpasswordInp.sendKeys('password');
+        expect(passwordMatchMsg.isPresent()).toEqual(false);
     });
 });
